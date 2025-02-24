@@ -138,7 +138,7 @@ export default function DashboardPage() {
                   fontWeight: "bold",
                   color: "#333",
                   textAlign: "center",
-                  fontSize: "24px", // Increased font size
+                  fontSize: "24px", 
                 }}
               >
                 Adicionar Pesagem
@@ -182,7 +182,7 @@ export default function DashboardPage() {
 
         <Grow in={true} timeout={1500}>
           <Box sx={{ display: "flex", flexDirection: { xs: "column", lg: "row" }, gap: "20px", padding: "20px" }}>
-            {/* UnpaidExpensesCard removed */}
+          
           </Box>
         </Grow>
 
@@ -395,7 +395,7 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         bgcolor: backgroundColor,
         borderRadius: "16px",
         boxShadow: theme.shadows[2],
-        height: "200px", // Increased height for more square-like appearance
+        height: "200px", 
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -408,8 +408,8 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         sx={{
           color: titleColor,
           fontWeight: "bold",
-          fontSize: "24px", // Increased font size
-          marginBottom: "12px", // Increased space between title and value
+          fontSize: "24px", 
+          marginBottom: "12px", 
         }}
       >
         {title}
@@ -419,7 +419,7 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         sx={{
           color: valueColor,
           fontWeight: "bold",
-          fontSize: "48px", // Increased font size
+          fontSize: "48px", 
         }}
       >
         {value}
