@@ -20,7 +20,6 @@ import {
   Fade,
   Grow,
   Button,
-  CircularProgress,
 } from "@mui/material"
 import {
   SearchOutlined as SearchOutlinedIcon,
@@ -31,6 +30,7 @@ import {
   Email as EmailIcon,
 } from "@mui/icons-material"
 import Sidebar from "../../components/sidebar"
+import { keyframes } from "@emotion/react"
 
 export default function DashboardPage() {
   const theme = useTheme()
@@ -63,17 +63,32 @@ export default function DashboardPage() {
           paddingTop: "3rem",
           overflowX: "hidden",
           overflowY: "auto",
-          backgroundColor: theme.palette.background.default,
+          backgroundColor: "#f0f4f8",
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#f1f1f1",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#888",
+            borderRadius: "4px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#555",
+          },
         }}
       >
         <Typography
           variant="h2"
           sx={{
-            mb: 8,
+            mb: 6,
             fontWeight: "bold",
-            color: "gray",
-            fontSize: "4rem",
+            color: "#2c3e50",
+            fontSize: { xs: "2.5rem", md: "3.5rem", lg: "4rem" },
             textAlign: "center",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+            animation: `${fadeIn} 1s ease-out`,
           }}
         >
           Controle de pesagem
@@ -85,9 +100,9 @@ export default function DashboardPage() {
               <DashboardCard
                 title="Quantitade de rotas feitas hoje"
                 value="470"
-                backgroundColor="#E3E3E3"
-                titleColor="#5A5A5A"
-                valueColor="#333333"
+                backgroundColor="#c3e6cb"
+                titleColor="#28a745"
+                valueColor="#28a745"
                 sx={{
                   height: "200px",
                   borderRadius: "12px",
@@ -138,7 +153,7 @@ export default function DashboardPage() {
                   fontWeight: "bold",
                   color: "#333",
                   textAlign: "center",
-                  fontSize: "24px", 
+                  fontSize: "24px",
                 }}
               >
                 Adicionar Pesagem
@@ -163,15 +178,19 @@ export default function DashboardPage() {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "black",
+                  backgroundColor: "#3498db",
                   color: "white",
-                  "&:hover": { backgroundColor: "#333" },
-                  padding: "8px 16px",
-                  fontSize: "14px",
+                  "&:hover": {
+                    backgroundColor: "#3498db",
+                    transform: "translateY(-2px)",
+                  },
+                  padding: "12px 24px",
+                  fontSize: "16px",
                   fontWeight: "bold",
-                  borderRadius: "20px",
-                  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "30px",
+                  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
                   transition: "all 0.3s ease",
+                  textTransform: "none",
                 }}
               >
                 Salvar Pesagem
@@ -181,9 +200,7 @@ export default function DashboardPage() {
         </Fade>
 
         <Grow in={true} timeout={1500}>
-          <Box sx={{ display: "flex", flexDirection: { xs: "column", lg: "row" }, gap: "20px", padding: "20px" }}>
-          
-          </Box>
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", lg: "row" }, gap: "20px", padding: "20px" }}></Box>
         </Grow>
 
         <Fade in={true} timeout={2000}>
@@ -223,9 +240,14 @@ function ExpenseControlCard({ search, setSearch, page, rowsPerPage, handleChange
         p: 3,
         bgcolor: theme.palette.background.paper,
         borderRadius: "16px",
-        boxShadow: theme.shadows[3],
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         height: "auto",
         width: "97%",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+          transform: "translateY(-5px)",
+        },
       }}
     >
       <Typography
@@ -235,6 +257,9 @@ function ExpenseControlCard({ search, setSearch, page, rowsPerPage, handleChange
           fontWeight: "bold",
           color: "#333",
           textAlign: "center",
+          fontSize: "28px",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
         }}
       >
         Registro de Pesagens
@@ -257,13 +282,14 @@ function ExpenseControlCard({ search, setSearch, page, rowsPerPage, handleChange
             width: "60%",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "black",
+                borderColor: "#3f51b5",
+                transition: "all 0.3s ease-in-out",
               },
               "&:hover fieldset": {
-                borderColor: "black",
+                borderColor: "#303f9f",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "black",
+                borderColor: "#1a237e",
               },
             },
           }}
@@ -273,30 +299,55 @@ function ExpenseControlCard({ search, setSearch, page, rowsPerPage, handleChange
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f5f5f5", fontSize: "18px" }}>Motorista</TableCell>
-              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f5f5f5", fontSize: "18px" }}>
+              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#333", color: "white", fontSize: "18px" }}>
+                Motorista
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#333", color: "white", fontSize: "18px" }}>
                 Número do Veículo
               </TableCell>
-              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f5f5f5", fontSize: "18px" }}>Data</TableCell>
-              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f5f5f5", fontSize: "18px" }}>Hora</TableCell>
-              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f5f5f5", fontSize: "18px" }}>Ações</TableCell>
+              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#333", color: "white", fontSize: "18px" }}>
+                Data
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#333", color: "white", fontSize: "18px" }}>
+                Hora
+              </TableCell>
+              <TableCell sx={{ fontWeight: "bold", backgroundColor: "#333", color: "white", fontSize: "18px" }}>
+                Ações
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredPesagens.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pesagem) => (
-              <TableRow key={pesagem.id} hover>
+            {filteredPesagens.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pesagem, index) => (
+              <TableRow
+                key={pesagem.id}
+                hover
+                sx={{
+                  transition: "all 0.2s ease-in-out",
+                  "&:hover": {
+                    backgroundColor: "#f5f5f5",
+                    transform: "scale(1.01)",
+                  },
+                  animation: `${fadeIn} 0.5s ease-out ${index * 0.1}s both`,
+                }}
+              >
                 <TableCell>{pesagem.motorista}</TableCell>
                 <TableCell>{pesagem.numeroVeiculo}</TableCell>
                 <TableCell>{pesagem.data}</TableCell>
                 <TableCell>{pesagem.hora}</TableCell>
                 <TableCell>
-                  <IconButton sx={{ color: "black", "&:hover": { backgroundColor: "#f0f0f0" } }}>
+                  <IconButton
+                    sx={{ color: "#3498db", "&:hover": { backgroundColor: "#3498db", transform: "scale(1.1)" } }}
+                  >
                     <VisibilityIcon />
                   </IconButton>
-                  <IconButton sx={{ color: "black", "&:hover": { backgroundColor: "#f0f0f0" } }}>
+                  <IconButton
+                    sx={{ color: "#3498db", "&:hover": { backgroundColor: "#3498db", transform: "scale(1.1)" } }}
+                  >
                     <EditIcon />
                   </IconButton>
-                  <IconButton sx={{ color: "black", "&:hover": { backgroundColor: "#f0f0f0" } }}>
+                  <IconButton
+                    sx={{ color: "#3498db", "&:hover": { backgroundColor: "#3498db", transform: "scale(1.1)" } }}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -313,6 +364,18 @@ function ExpenseControlCard({ search, setSearch, page, rowsPerPage, handleChange
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          ".MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows": {
+            color: "#333",
+            fontWeight: "bold",
+          },
+          ".MuiTablePagination-select": {
+            color: "#333",
+          },
+          ".MuiTablePagination-actions": {
+            color: "#333",
+          },
+        }}
       />
     </Card>
   )
@@ -394,13 +457,18 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         p: 3,
         bgcolor: backgroundColor,
         borderRadius: "16px",
-        boxShadow: theme.shadows[2],
-        height: "200px", 
+        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        height: "200px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          transform: "translateY(-5px) scale(1.02)",
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        },
       }}
     >
       <Typography
@@ -408,8 +476,12 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         sx={{
           color: titleColor,
           fontWeight: "bold",
-          fontSize: "24px", 
-          marginBottom: "12px", 
+          fontSize: "24px",
+          marginBottom: "12px",
+          transition: "all 0.3s ease-in-out",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
         }}
       >
         {title}
@@ -419,7 +491,12 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
         sx={{
           color: valueColor,
           fontWeight: "bold",
-          fontSize: "48px", 
+          fontSize: "48px",
+          animation: `${countUp} 2s ease-out`,
+          transition: "all 0.3s ease-in-out",
+          "&:hover": {
+            transform: "scale(1.1)",
+          },
         }}
       >
         {value}
@@ -428,5 +505,25 @@ function DashboardCard({ title, value, backgroundColor, titleColor, valueColor }
   )
 }
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
 
+const countUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
 
